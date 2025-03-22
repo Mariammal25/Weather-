@@ -37,3 +37,5 @@ function calculateWeather() {
     weatherResult.innerText = `Weather: ${weather}`;
 }
 ```
+// Function to calculate weatherfunction calculateWeather() {    // Get input values    const temperature = parseFloat(temperatureInput.value);    const humidity = parseFloat(humidityInput.value);    const windSpeed = parseFloat(windSpeedInput.value);    // Calculate weather    let weather;    if (temperature > 25 && humidity > 60) {        weather = "Hot and Humid";    } else if (temperature < 15 && humidity < 40) {        weather = "Cold and Dry";    } else if (windSpeed > 10) {        weather = "Windy";    } else {        weather = "Normal";    }    // Display result    weatherResult.innerText = `Weather: ${weather}`;}```
+0 commit commentsComments0 (0)Lock conversation
