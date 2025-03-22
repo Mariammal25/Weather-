@@ -1,59 +1,55 @@
-CSS (in style.css file)
-```
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 
-.weather-calculator {
-    width: 300px;
-    margin: 50px auto;
+.weather-container {
     text-align: center;
-    background-color: #fff;
+    background-color: white;
     padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.weather-calculator form {
+h1 {
     margin-bottom: 20px;
 }
 
-.weather-calculator label {
-    display: block;
-    margin-bottom: 10px;
+input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
 }
 
-.weather-calculator input[type="number"] {
-    width: 100%;
-    height: 30px;
-    margin-bottom: 20px;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.weather-calculator button[type="button"] {
-    width: 100%;
-    height: 40px;
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px;
+button {
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.weather-calculator button[type="button"]:hover {
-    background-color: #3e8e41;
+button:hover {
+    background-color: #45a049;
 }
 
-.result {
+#weather-info {
     margin-top: 20px;
 }
 
-.result h2 {
-    font-size: 24px;
-    color: #666;
+#temperature {
+    font-size: 2em;
+    font-weight: bold;
 }
-body {    font-family: Arial, sans-serif;    background-color: #f2f2f2;}.weather-container {    width: 300px;    margin: 50px auto;    text-align: center;@@ -13,19 +15,43 @@ body {    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);}.weather-container h1 {    font-size: 24px;    margin-bottom: 10px;}.weather-container h2 {    font-size: 18px;    color: #666;    margin-bottom: 20px;}.weather-container h3 {    font-size: 16px;    color: #999;    margin-bottom: 10px;}
-0 commit commentsComments0 (0)Lock conversation
+
+#description {
+    font-size: 1.2em;
+    color: #555;
+}
