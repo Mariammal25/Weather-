@@ -1,50 +1,24 @@
-HTML
-```
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
-<html lang="en">
-<head>
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <title>Weather Calculator</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style.css">
 </head>
-</head>
-<body>
 <body>
     <div class="weather-container">
-    <div class="weather-calculator">
-        <h1 id="location"></h1>
-        <h1>Weather Calculator</h1>
-        <h2 id="weather-description"></h2>
-        <form>
-        <h3 id="temperature"></h3>
-            <label for="temperature">Temperature (°C):</label>
-        <h3 id="humidity"></h3>
-            <input type="number" id="temperature" required>
-        <h3 id="wind-speed"></h3>
-            <label for="humidity">Humidity (%):</label>
-            <input type="number" id="humidity" required>
-            <label for="wind-speed">Wind Speed (m/s):</label>
-            <input type="number" id="wind-speed" required>
-            <button id="calculate-btn">Calculate Weather</button>
-        </form>
-        <div class="result">
-            <h2 id="weather-result"></h2>
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city">
+        <button onclick="getWeather()">Get Weather</button>
+        
+        <div id="weather-info">
+            <p id="city-name"></p>
+            <p id="temperature"></p>
+            <p id="description"></p>
         </div>
     </div>
-    </div>
-
 
     <script src="script.js"></script>
-    <script src="script.js"></script>
-</body>
 </body>
 </html>
-</html
