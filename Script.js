@@ -1,41 +1,26 @@
-JavaScript (in script.js file)
-```
-// Get input elements
-const temperatureInput = document.getElementById("temperature");
-const humidityInput = document.getElementById("humidity");
-const windSpeedInput = document.getElementById("wind-speed");
+const apiKey = 'YOUR_API_KEY';  // Replace with your OpenWeatherMap API key
 
-// Get calculate button
-const calculateBtn = document.getElementById("calculate-btn");
+function getWeather() {
+    const city = document.getElementById('city').value;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-// Get result element
-const weatherResult = document.getElementById("weather-result");
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.cod === 200) {
+                const cityName = data.name;
+                const temp = data.main.temp;
+                const description = data.weather[0].description;
 
-// Add event listener to calculate button
-calculateBtn.addEventListener("click", calculateWeather);
-
-// Function to calculate weather
-function calculateWeather() {
-    // Get input values
-    const temperature = parseFloat(temperatureInput.value);
-    const humidity = parseFloat(humidityInput.value);
-    const windSpeed = parseFloat(windSpeedInput.value);
-
-    // Calculate weather
-    let weather;
-    if (temperature > 25 && humidity > 60) {
-        weather = "Hot and Humid";
-    } else if (temperature < 15 && humidity < 40) {
-        weather = "Cold and Dry";
-    } else if (windSpeed > 10) {
-        weather = "Windy";
-    } else {
-        weather = "Normal";
-    }
-
-    // Display result
-    weatherResult.innerText = `Weather: ${weather}`;
+                document.getElementById('city-name').textContent = cityName;
+                document.getElementById('temperature').textContent = `${temp}°C`;
+                document.getElementById('description').textContent = description;
+            } else {
+                alert('City not found!');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            alert('Failed to retrieve weather data!');
+        });
 }
-```
-// Function to calculate weatherfunction calculateWeather() {    // Get input values    const temperature = parseFloat(temperatureInput.value);    const humidity = parseFloat(humidityInput.value);    const windSpeed = parseFloat(windSpeedInput.value);    // Calculate weather    let weather;    if (temperature > 25 && humidity > 60) {        weather = "Hot and Humid";    } else if (temperature < 15 && humidity < 40) {        weather = "Cold and Dry";    } else if (windSpeed > 10) {        weather = "Windy";    } else {        weather = "Normal";    }    // Display result    weatherResult.innerText = `Weather: ${weather}`;}```
-0 commit commentsComments0 (0)Lock conversation
