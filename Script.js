@@ -1,30 +1,39 @@
-// API Key from OpenWeatherMap
-const apiKey = "YOUR_API_KEY_HERE";
+JavaScript (in script.js file)
+```
+// Get input elements
+const temperatureInput = document.getElementById("temperature");
+const humidityInput = document.getElementById("humidity");
+const windSpeedInput = document.getElementById("wind-speed");
 
-// Get user's location
-navigator.geolocation.getCurrentPosition(position => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+// Get calculate button
+const calculateBtn = document.getElementById("calculate-btn");
 
-    // API URL
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+// Get result element
+const weatherResult = document.getElementById("weather-result");
 
-    // Fetch weather data
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const location = data.name;
-            const weatherDescription = data.weather[0].description;
-            const temperature = data.main.temp;
-            const humidity = data.main.humidity;
-            const windSpeed = data.wind.speed;
+// Add event listener to calculate button
+calculateBtn.addEventListener("click", calculateWeather);
 
-            // Update HTML elements
-            document.getElementById("location").innerText = location;
-            document.getElementById("weather-description").innerText = weatherDescription;
-            document.getElementById("temperature").innerText = `Temperature: ${temperature}°C`;
-            document.getElementById("humidity").innerText = `Humidity: ${humidity}%`;
-            document.getElementById("wind-speed").innerText = `Wind Speed: ${windSpeed} m/s`;
-        })
-        .catch(error => console.error("Error:", error));
-});
+// Function to calculate weather
+function calculateWeather() {
+    // Get input values
+    const temperature = parseFloat(temperatureInput.value);
+    const humidity = parseFloat(humidityInput.value);
+    const windSpeed = parseFloat(windSpeedInput.value);
+
+    // Calculate weather
+    let weather;
+    if (temperature > 25 && humidity > 60) {
+        weather = "Hot and Humid";
+    } else if (temperature < 15 && humidity < 40) {
+        weather = "Cold and Dry";
+    } else if (windSpeed > 10) {
+        weather = "Windy";
+    } else {
+        weather = "Normal";
+    }
+
+    // Display result
+    weatherResult.innerText = `Weather: ${weather}`;
+}
+```
