@@ -4,7 +4,7 @@ const weatherIcon = document.querySelector(".weather-icon");
 const appContainer = document.querySelector(".app-container");
 
 
-const weatherApiKey = 'b2fa3271ab55c9c76e1b2a2d1afd0478';
+const weatherApiKey = 'c20b3c995673d60e5b15b3b756321731';
 const weatherURL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=`;
 
 
