@@ -1,104 +1,88 @@
-const searchBox = document.querySelector(".search-box input");
-const searchBtn = document.querySelector("#search");
-const weatherIcon = document.querySelector(".weather-icon");
-const appContainer = document.querySelector(".app-container");
-
-
-const weatherApiKey = 'b2fa3271ab55c9c76e1b2a2d1afd0478';
-const weatherURL = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=`;
-
-
-
-const imageApiKey ="2BsfBnNAfcAGF3oX4F_fRIlYnOXYBGYyJpeHfo8AWp4";
-const imageURL = "https://api.unsplash.com/search/photos?page=1&query=";
-
-
-
-
-window.addEventListener('load', ()=>{
-    setTimeout(()=>{
-        document.querySelector("#preloader").style.display = "none";
-    },1500)
-})
-
-
-//Weather API call
-async function checkWeather(city){
-    const response = await fetch(weatherURL + city + `&appid=${weatherApiKey}`);
-    const data = await response.json();
-
-
-    if(response.status === 404){
-        document.querySelector(".error").style.display = 'block';
-        document.querySelector(".weather").style.visibility = "hidden";
-        appContainer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("images/weather.jpg")`;
+// Simulated weather data (hardcoded for demonstration purposes)
+const weatherData = {
+    "New York": {
+        temperature: 22,
+        humidity: 60,
+        description: "Sunny",
+    },
+    "London": {
+        temperature: 16,
+        humidity: 75,
+        description: "Cloudy",
+    },
+    "Tamilnadu": {
+        temperature: 22,
+        humidity: 60,
+        description: "Sunny",
+    },
+    "India": {
+        temperature: 42,
+        humidity: 50,
+        description: "Sunny",
+    },
+    "Delhi": {
+        temperature: 32,
+        humidity: 68,
+        description: "Sunny",
+    },
+    "Tokyo": {
+        temperature: 18,
+        humidity: 80,
+        description: "Rainy",
+    },
+    "Paris": {
+        temperature: 20,
+        humidity: 65,
+        description: "Clear",
+    },
+    "Sydney": {
+        temperature: 25,
+        humidity: 50,
+        description: "Windy",
     }
-    else{
-        setTimeout(()=>{
-            updateData(data);
-        },500)
+};
+
+// Function to get weather data from the hardcoded list
+function getWeather() {
+    const city = document.getElementById('cityInput').value.trim();
+
+    if (city === "") {
+        alert("Please enter a city name");
+        return;
+    }
+
+    // Check if the city exists in the simulated data
+    if (weatherData[city]) {
+        displayWeather(weatherData[city], city);
+    } else {
+        showError("City not found! Please try again.");
     }
 }
 
-async function updateData(data){
+// Function to display weather data
+function displayWeather(data, city) {
+    document.getElementById('error-message').classList.add('hidden');
+    document.getElementById('weather-info').classList.remove('hidden');
 
-    //Update the weather data
-    document.querySelector("#city").textContent = data.name;
-    document.querySelector("#temp").textContent = Math.round(data.main.temp) +"°c";
-    document.querySelector(".humidity").textContent = data.main.humidity + '%';
-    document.querySelector(".wind").textContent = data.wind.speed + "Km/h";
-
-
-    //Change the Weather Icon
-    const weatherCondition = data.weather[0].main;
-
-    if(weatherCondition == 'Clear'){
-        weatherIcon.src = "images/clear.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-    else if(weatherCondition == 'Clouds'){
-        weatherIcon.src = "images/clouds.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-    else if(weatherCondition == 'Haze'){
-        weatherIcon.src = "images/drizzle.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-    else if(weatherCondition == 'Mist'){
-        weatherIcon.src = "images/mist.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-    else if(weatherCondition == 'Rain'){
-        weatherIcon.src = "images/rain.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-    else if(weatherCondition == 'Snow'){
-        weatherIcon.src = "images/snow.png"
-        document.querySelector("#condition").textContent = data.weather[0].main;
-    }
-
-    document.querySelector(".weather").style.display = "block";
-    document.querySelector(".error").style.display = 'none';
+    document.getElementById('city-name').textContent = `${city}`;
+    document.getElementById('temperature').textContent = `Temperature: ${data.temperature}°C`;
+    document.getElementById('humidity').textContent = `Humidity: ${data.humidity}%`;
+    document.getElementById('weather-description').textContent = `Weather: ${data.description}`;
 }
 
-//Default Call
-checkWeather("kolkata");
-generateImage("kolkata")
-
-
-//Image API call
-async function generateImage(city){
-    const response = await fetch(imageURL + city + `&client_id=${imageApiKey}`)
-    const data = await response.json();
-
-    const img = data.results[0].urls.full;
-
-    appContainer.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${img})`;
-    
+// Function to show error messages
+function showError(message) {
+    document.getElementById('error-message').textContent = message;
+    document.getElementById('error-message').classList.remove('hidden');
+    document.getElementById('weather-info').classList.add('hidden');
 }
 
+// Adding event listener to the button
+document.getElementById('searchButton').addEventListener('click', getWeather);
 
-searchBtn.addEventListener('click', (e)=>{
-    generateImage(searchBox.value.trim());
-    checkWeather(searchBox.value.trim());
-})
+// Optional: Allow pressing Enter key to trigger search
+document.getElementById('cityInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        getWeather();
+    }
+});
